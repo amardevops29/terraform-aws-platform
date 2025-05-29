@@ -1,0 +1,19 @@
+# --- Terraform ---
+.terraform/            # Provider plugins and init cache
+*.tfstate              # Terraform state files
+*.tfstate.backup       # Backup state files
+*.tfvars               # Variable definition files (often contain secrets)
+*.tfvars.json
+crash.log              # Crash log files
+terraform.tfplan       # Plan output files
+*.zip                  # Zip output files, e.g., Lambda zips
+
+# --- Editor & System Files ---
+.DS_Store              # macOS metadata
+*.swp                  # vim temporary files
+.idea/                 # JetBrains IDE config
+.vscode/               # VS Code settings
+*.log                  # Log files
+
+# --- GitHub Actions cache (optional) ---
+.github/cache/
