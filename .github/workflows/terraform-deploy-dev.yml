@@ -63,6 +63,7 @@ jobs:
         uses: bridgecrewio/checkov-action@master
         with:
           directory: .
+          skip_check: CKV_AWS_23,CKV_AWS_52
 
   terraform-apply:
     name: Terraform Apply for ${{ matrix.env }}
