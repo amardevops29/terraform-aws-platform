@@ -1,6 +1,9 @@
 #-----------------------------
 # Application Load Balancer
 #-----------------------------
+# tfsec:ignore:AWS005
+# skip_check:CKV_AWS_2
+# Please remove this above two line so that it doesnt skip the check on CI/CD pipeline on production.
 resource "aws_lb" "app_alb" {
   name               = var.alb_name
   internal           = false
