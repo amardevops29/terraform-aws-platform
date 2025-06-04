@@ -1,4 +1,4 @@
-name: Deploy to AWS using Terraform to Dev
+name: Deploy to AWS Development environment using Terraform
 
 on:
   push:
