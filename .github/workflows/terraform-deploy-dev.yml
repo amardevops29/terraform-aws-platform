@@ -14,8 +14,8 @@ permissions:
   contents: read
 
 jobs:
-  terraform:
-    name: Terraform Plan & Deployment for ${{ matrix.env }}
+  terraform-plan:
+    name: Terraform Plan for ${{ matrix.env }}
     runs-on: ubuntu-latest
 
     strategy:
@@ -29,7 +29,7 @@ jobs:
     # Filter job by branch using matrix + github.ref
     steps:
       - name: Skip job if branch doesn't match
-        if: github.ref != format('refs/heads/{0}', matrix.branch)
+        if: github.ref == 'refs/heads/dev' ||  github.event_name == 'pull_request' && github.base_ref == 'dev'
         run: echo "Skipping job for unmatched branch."
 
       - name: Checkout code
@@ -62,7 +62,7 @@ jobs:
 
       - name: Terraform Plan
         if: github.ref == format('refs/heads/{0}', matrix.branch)
-        run: terraform plan -var-file="environments/${{ matrix.env }}/terraform.tfvars"
+        run: terraform plan -var-file="terraform/environments/${{ matrix.env }}/terraform.tfvars"
 
       - name: Run TFSec
         if: github.ref == format('refs/heads/{0}', matrix.branch)
@@ -74,5 +74,10 @@ jobs:
         with:
           directory: .
 
-      - name: Terraform Apply
-        run: terraform apply -auto-approve -var-file="environments/${{ matrix.env }}/terraform.tfvars"
+  terraform-apply:
+    name: Terraform Apply for ${{ matrix.env }}
+    if: github.event_name == 'push'    
+    runs-on: ubuntu-latest
+    steps:
+      - name: Terraform Deploy        
+        run: terraform apply -auto-approve -var-file="terraform/environments/${{ matrix.env }}/terraform.tfvars"
