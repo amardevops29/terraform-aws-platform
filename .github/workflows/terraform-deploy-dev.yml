@@ -51,7 +51,7 @@ jobs:
         run: terraform validate
 
       - name: Terraform Plan
-        run: terraform plan -var-file="/terraform/environments/${{ matrix.env }}/terraform.tfvars"
+        run: terraform plan -var-file="terraform.tfvars"
         working-directory: terraform/environments/${{ matrix.env }}
 
       - name: Run TFSec
@@ -92,5 +92,5 @@ jobs:
         run: terraform init
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve -var-file="/terraform/environments/${{ matrix.env }}/terraform.tfvars"
+        run: terraform apply -auto-approve -var-file="terraform.tfvars"
         working-directory: terraform/environments/${{ matrix.env }}
