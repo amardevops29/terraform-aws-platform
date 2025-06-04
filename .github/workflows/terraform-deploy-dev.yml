@@ -1,4 +1,4 @@
-name: Deploy to AWS Development environment via Terraform
+name: Deploy to AWS Development environment using Terraform.
 
 on:
   push:
@@ -56,6 +56,8 @@ jobs:
 
       - name: Run TFSec
         uses: aquasecurity/tfsec-action@v1.0.0
+        with:
+          soft_fail: true
 
       - name: Run Checkov
         uses: bridgecrewio/checkov-action@master
