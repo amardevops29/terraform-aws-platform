@@ -42,6 +42,7 @@ jobs:
 
       - name: Terraform Init
         run: terraform init
+        working-directory: terraform/environments/${{ matrix.env }}
 
       - name: Terraform Format Check
         run: terraform fmt -check
@@ -51,6 +52,7 @@ jobs:
 
       - name: Terraform Plan
         run: terraform plan -var-file="terraform/environments/${{ matrix.env }}/terraform.tfvars"
+        working-directory: terraform/environments/${{ matrix.env }}
 
       - name: Run TFSec
         uses: aquasecurity/tfsec-action@v1.0.0
