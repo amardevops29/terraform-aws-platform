@@ -1,8 +1,11 @@
-name: Deploy to AWS Production environment using Terraform
+name: Deploy to AWS Production environment via Terraform
 
 on:
   push:
      branches: [main]
+     paths:
+      - './terraform/environments/dev/**'
+      - '.github/workflows/terraform-deploy-dev.yml'
   pull_request:
      branches: [main]
 
