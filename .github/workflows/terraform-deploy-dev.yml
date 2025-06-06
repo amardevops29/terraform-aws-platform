@@ -68,7 +68,7 @@ jobs:
 
   terraform-apply:
     name: Terraform Apply for ${{ matrix.env }}
-    if: github.ref == 'refs/heads/dev' && github.event_name == 'push'
+    if: github.ref == 'refs/heads/dev' || (github.event_name == 'pull_request' && github.base_ref == 'dev')
     runs-on: ubuntu-latest
 
     strategy:
